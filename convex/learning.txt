@@ -1,0 +1,36 @@
+import { defineSchema, defineTable } from "convex/server";
+import { v } from "convex/values";
+
+export default defineSchema({
+    boards : defineTable({
+        title : v.string(),
+        orgId : v.string(),
+        authorId : v.string(),
+        authorName : v.string(),
+        imageUrl : v.string(),
+    })
+    .index("by_org",["orgId"])
+    .searchIndex("search_title",{
+        searchField : "title",
+        filterFields : ["orgId"],
+    })
+})
+
+// above scjema understandable
+schema deination boardSchema The schema for the boards collection.
+ther are fields like title, orgId, authorId, authorName, imageUrl 
+like this
+
+indexes : {orgId: 1} and index onthe orgId filed for efficient querying.
+andmore 
+
+
+Key defrrenceces
+
+1. shcmea defination: 
+IN convex/server , schemas are defined using defineSchema and defineTable with v to specify value types
+In mongodb with mongoose,schemaas are defined usint the schema class where you specifiy the type and require fields directly.
+
+2. Indexing : 
+COnvex/server uses method like .index and .searchIndex to define indexes.
+
